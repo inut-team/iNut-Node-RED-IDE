@@ -17,6 +17,16 @@
 // The `https` setting requires the `fs` module. Uncomment the following
 // to make it available:
 //var fs = require("fs");
+var fs = require('fs')
+var userDir = './flow'
+
+if (process.env.PORT) {
+	console.log("Create folder if not exists", userDir, process.env.PORT)
+	userDir += process.env.PORT
+	if (fs.existsSync(userDir)) {
+		fs.mkdirSync(userDir)
+	}
+}
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"; 
 module.exports = {
     editorTheme: {
@@ -81,7 +91,7 @@ module.exports = {
 
     // By default, all user data is stored in the Node-RED install directory. To
     // use a different location, the following property can be used
-    userDir: './flow',
+    userDir: userDir,
 
     // Node-RED scans the `nodes` directory in the install directory to find nodes.
     // The following property can be used to specify an additional directory to scan.
